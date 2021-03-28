@@ -9,17 +9,16 @@ public class Hilo extends Thread{
 		for(int i = 1 ; i <= 10 ; i++) {
 			if (x%2==0) {
 				try {
-					double r = Math.random()*10;
+					double r = Math.random()*30;
 					Thread.sleep((long) r);
 					}catch (InterruptedException ie) { }
 				x=x*2+1;
-				System.out.println(x);
 				
 			}else {
-				x++;
-				System.out.println(x);
+				x++;	
 			}
 		}
+		System.out.println(x);
 	}
 
 }
