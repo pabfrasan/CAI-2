@@ -11,12 +11,10 @@ public class HiloSync extends Thread{
 					Thread.sleep((long) r);
 					}catch (InterruptedException ie) { }
 				x=x*2+1;
-				System.out.println(x);
-				
 			}else {
 				x++;
-				System.out.println(x);
 			}
 		}
+		System.out.println(x);
 	}
 }
