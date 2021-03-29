@@ -10,10 +10,8 @@ import javax.net.SocketFactory;
 public class Client extends Thread {
 	private int port = 8082;
 	private String hostname = "localhost";
-	private BufferedReader in;
 	private String text;
 	private Socket clientSocket;
-	private PrintWriter out;
 
 	public Client(Integer port) {
 		this.port = port;
@@ -23,8 +21,8 @@ public class Client extends Thread {
 		SocketFactory socketFactory = SocketFactory.getDefault();
 		try {
 			clientSocket = socketFactory.createSocket(hostname, port);
-			out = new PrintWriter(clientSocket.getOutputStream(), true);
-			in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+			PrintWriter out = new PrintWriter(clientSocket.getOutputStream(), true);
+			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
 			out.println(text);
 			out.flush();
@@ -47,16 +45,5 @@ public class Client extends Thread {
 	public void sendMessage(String text) {
 		this.text = text;
 		this.start();
-	}
-
-	public void stopConnection() {
-		try {
-			this.in.close();
-			this.out.close();
-			this.clientSocket.close();
-			this.interrupt();
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
-		}
 	}
 }
