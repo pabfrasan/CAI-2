@@ -30,7 +30,7 @@ public class ServerPush extends Thread{
 				BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 				PrintWriter writer = new PrintWriter(clientSocket.getOutputStream(), true);) {
                 System.out.println("Server socket accepted");
-				this.text = "Buenos días , . ! 好";
+				this.text = "Buenos días , . !";
 				writer.println(text);
 				writer.flush();
 				String response = reader.readLine();
