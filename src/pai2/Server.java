@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.math.BigInteger;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.security.MessageDigest;
@@ -104,7 +105,10 @@ public class Server {
 			String message = input.readLine();
 			// Compute MAC of the message, calculated as the hash of the combination of the
 			// message, the key and the nonce
-			String computedMessageMAC = Util.fromByteArray(algorithm.digest((message + key + nonce).getBytes()));
+			byte[] messageDigest = algorithm.digest((message+key+nonce).getBytes());
+			BigInteger number = new BigInteger(1, messageDigest);
+			String computedMessageMAC = number.toString(16);
+//			String computedMessageMAC = Util.fromByteArray(algorithm.digest((message + key + nonce).getBytes()));
 			// MAC
 			String messageMAC = input.readLine();
 			if (messageMAC.equals(computedMessageMAC)) {

@@ -1,5 +1,6 @@
 package pai2;
 import java.io.*;
+import java.math.BigInteger;
 import java.net.Socket;
 import java.security.MessageDigest;
 
@@ -51,11 +52,17 @@ public class Client {
 			output = new PrintWriter(new OutputStreamWriter(socket.getOutputStream()));
 			// Get nonce from the server
 			String nonce = input.readLine();
+			System.out.println("nonce que recibe el cliente"+nonce);
 			// Send message to the server
 			output.write(message + "\n");
 			output.flush();
 			// Calculate the MAC with shared key
-			String messageMAC = Util.fromByteArray(algorithm.digest((message + key + nonce).getBytes()));
+			String messageWithoutIntegrity = "aaaaa";
+			byte[] messageDigest = algorithm.digest((message+key+nonce).getBytes());
+			BigInteger number = new BigInteger(1, messageDigest);
+			String messageMAC = number.toString(16);
+//			String messageMAC = Util.fromByteArray(algorithm.digest((message + key + nonce).getBytes()));
+			System.out.println("Cliente "+messageMAC);
 			output.write(messageMAC + "\n");
 			output.flush();
 			// Flush operations to send messages correctly
