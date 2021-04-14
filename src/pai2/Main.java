@@ -7,10 +7,10 @@ import javax.swing.JOptionPane;
 public class Main {
     public static void main(String[] args) throws IOException {
 		try {
-			String key = JOptionPane.showInputDialog(null, "Enter key:");
-			String algorithmName = JOptionPane.showInputDialog(null, "Enter the name of the algorithm:");
+			String key = JOptionPane.showInputDialog(null, "Introduzca la clave:");
+			String algorithmName = JOptionPane.showInputDialog(null, "Introduzca el algoritmo:");
 			MessageDigest algorithm = MessageDigest.getInstance(algorithmName);
-			String message = JOptionPane.showInputDialog(null, "Enter message:");
+			String message = JOptionPane.showInputDialog(null, "Introduzca el mensaje:");
 			// Initialize server and client
 			Server server = new Server(key, algorithm);
 			Client client = new Client(key, algorithm);
@@ -18,8 +18,8 @@ public class Main {
 			Thread serverThread = new Thread(() -> server.getMessage());
 			clientThread.start();
 			serverThread.start();
-		} catch (NoSuchAlgorithmException e) {
-			e.printStackTrace();
+		} catch (NoSuchAlgorithmException exception) {
+			exception.printStackTrace();
 		}
 	}
 }
