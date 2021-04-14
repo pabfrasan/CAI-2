@@ -10,7 +10,7 @@ public class Main {
 			String key = JOptionPane.showInputDialog(null, "Introduzca la clave:");
 			String algorithmName = JOptionPane.showInputDialog(null, "Introduzca el algoritmo:");
 			MessageDigest algorithm = MessageDigest.getInstance(algorithmName);
-			String message = JOptionPane.showInputDialog(null, "Introduzca la cuenta origen");
+			String message = JOptionPane.showInputDialog(null, "Introduzca el mensaje");
 			Server server = new Server(key, algorithm);
 			Client client = new Client(key, algorithm);
 			Thread clientThread = new Thread(() -> client.sendMessage(message));
