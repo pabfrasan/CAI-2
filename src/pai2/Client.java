@@ -8,20 +8,12 @@ import javax.net.*;
 import javax.swing.JOptionPane;
 
 public class Client {
-
-	// Clave compartida entre cliente y servidor
 	private String key;
-	
-	// Algoritmo para crear la MAC
 	private MessageDigest algorithm;
-
-	
 	public Client(String key, MessageDigest algorithm) {
 		this.key = key;
 		this.algorithm = algorithm;
 	}
-
-	
 	public void sendMessage(String message) {
 		
 		Socket socket = null;
@@ -44,12 +36,8 @@ public class Client {
 			String clientMessageMAC = Util.fromByteArray(algorithm.digest((message + key + nonce).getBytes()));
 			output.write(clientMessageMAC + "\n");
 			output.flush();
-			
-			// Leemos la respuesta del servidor
 			String response = input.readLine();
-			// Mostramos la respuesta
 			JOptionPane.showMessageDialog(null, response);
-			// Cerramos conexiones
 		} catch (IOException exception) {
 			exception.printStackTrace();
 		} finally {
