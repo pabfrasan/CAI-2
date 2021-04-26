@@ -33,7 +33,7 @@ public class BYODServer {
 	private void runServer() {
         while (true) {
             try {
-                System.err.println("Esperando conexiones de clientes...");
+                System.err.println("Esperando conexiones...");
                 Socket socket = (Socket) serverSocket.accept();
              
                 BufferedReader input = new BufferedReader(new InputStreamReader(socket.getInputStream()));
